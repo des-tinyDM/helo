@@ -1,0 +1,16 @@
+.Dash {
+  background-image: url("http://www.klprinting.com.my/wp-content/uploads/nbdesigner/cliparts/power/sad-lion-face.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  width: 90%;
+  color: white;
+  font-size: 4rem;
+}
+.audio {
+  position: absolute;
+  right: 0;
+}
