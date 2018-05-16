@@ -21,10 +21,9 @@ const getUser = (req, res) => {
   //     } else {
   //       res.status(200).json(req.user);
   //     }
-  //   console.log(req.user);
-  req.app
-    .get("db")
-    .auth.getUserByAuthID(req.user.authid)
+  //   console.log(`this one`, req.user);
+  req.app.get("db");
+  getUserByAuthID(req.user.id)
     .then(user => res.status(200).json(user[0]))
     .catch(err => res.status(500).json(err));
 };

@@ -9,6 +9,7 @@
   justify-content: space-between;
   background: linear-gradient(180deg, #91c0ac, #9ec9f2, #612558);
   box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.25);
+  z-index: 1000;
 }
 
 .nav-link img {

@@ -1,19 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUser } from "../../ducks/reducer";
+import { getPosts } from "../../ducks/reducer";
 import "./Dash.css";
+import Post from "../Post/Post";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentDidMount() {}
+  componentDidMount() {
+    {
+      this.props.user[0] ? this.props.getPosts(this.props.user[0].id) : null;
+    }
+  }
   render() {
-    console.log(this.props);
+    let posts = this.props.posts.map((e, i) => {
+      console.log(e);
+      return (
+        <Post
+          key={i}
+          title={e.title}
+          img={e.img}
+          content={e.content}
+          id={e.post_id}
+        />
+      );
+    });
+    console.log(`here`, this.props);
     return (
       <div className="Dash">
-        Dash
         <div>
           <iframe
             className="audio"
@@ -25,6 +41,14 @@ class Dashboard extends Component {
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/255052117&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
           />
         </div>
+        <div className="search-posts-div">
+          <input placeholder="Search by Title" />
+          <div className="search-buttons">
+            <button>Search</button>
+            <button>MyPosts</button>
+          </div>
+        </div>
+        {posts}
       </div>
     );
   }
@@ -32,8 +56,9 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    posts: state.posts
   };
 };
 
-export default connect(mapStateToProps, { getUser })(Dashboard);
+export default connect(mapStateToProps, { getPosts })(Dashboard);

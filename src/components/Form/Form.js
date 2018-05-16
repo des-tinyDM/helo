@@ -4,7 +4,7 @@ import "./Form.css";
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {title: '', };
   }
   render() {
     return (

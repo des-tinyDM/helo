@@ -5,14 +5,17 @@ const cors = require("cors");
 
 const session = require("express-session");
 const massive = require("massive");
-// const passport = require("passport");
+const passport = require("passport");
 
-// const { strategy, getUser, logout } = require(`${__dirname}/controllers/auth`);
+const { strategy, getUser, logout } = require(`${__dirname}/controllers/auth`);
 
 const {
   registerUser,
   login,
-  updateUserInfo
+  updateUserInfo,
+  getPosts,
+  editPost,
+  deletePost
 } = require(`${__dirname}/controllers/controller`);
 
 const port = process.env.PORT || 3001;
@@ -39,38 +42,37 @@ app.use(
   })
 );
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(strategy);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(strategy);
 
-// passport.serializeUser((user, done) => {
-//   // console.log(user);
-//   app
-//     .get("db")
-//     .user.getUserByAuthid(user.id)
-//     .then(response => {
-//       if (!response[0]) {
-//         app
-//           .get("db")
-//           .user.addUserByAuthid([
-//             user.name.givenName,
-//             user.name.familyName,
-//             user.picture,
-//             user.id
-//           ])
-//           .then(res => {
-//             return done(null, res[0]);
-//           })
-//           .catch(err => console.log(err));
-//       } else {
-//         return done(null, response[0]);
-//       }
-//     })
-//     .catch(err => console.log(err));
-// });
-// passport.deserializeUser((user, done) => {
-//   return done(null, user);
-// });
+passport.serializeUser((user, done) => {
+  // console.log(user);
+  app.get("db");
+  getUserByAuthid(user.id)
+    .then(response => {
+      console.log(response);
+      if (!response[0]) {
+        app.get("db");
+        addUserByAuthid([
+          user.name.givenName,
+          user.name.familyName,
+          user.picture,
+          user.id
+        ])
+          .then(res => {
+            return done(null, res[0]);
+          })
+          .catch(err => console.log(err));
+      } else {
+        return done(null, response[0]);
+      }
+    })
+    .catch(err => console.log(err));
+});
+passport.deserializeUser((user, done) => {
+  return done(null, user);
+});
 
 //AUTH ENDPOINTS
 // app.get(
@@ -89,6 +91,9 @@ app.use(
 app.post(`/api/register`, registerUser);
 app.post(`/api/login`, login);
 app.put(`/api/update/:username`, updateUserInfo);
+app.get(`/api/posts/:id`, getPosts);
+app.put(`/api/editpost/:post_id`, editPost);
+app.delete(`/api/deletepost/:post_id`, deletePost);
 
 app.listen(port, () => {
   console.log(`Comin' at you from ${port}`);

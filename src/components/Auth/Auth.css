@@ -49,3 +49,9 @@ h1 {
   border: none;
   /* border: none; */
 }
+post-container button {
+  color: black !important;
+}
+button + button {
+  border: 10px solid salmon;
+}

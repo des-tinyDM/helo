@@ -1,1 +1,4 @@
-SELECT * from posts where user_id = $1;
+SELECT * from posts p 
+join users u on p.author_id = u.id
+
+where author_id = $1;

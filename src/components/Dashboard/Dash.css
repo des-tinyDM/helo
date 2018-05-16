@@ -9,8 +9,69 @@
   width: 90%;
   color: white;
   font-size: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
 }
 .audio {
   position: absolute;
   right: 0;
+}
+.search-posts-div {
+  margin-top: 5vh;
+  width: 80%;
+  height: 5vh;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  border: 1px solid grey;
+}
+.search-posts-div input {
+  border: 1px solid grey;
+  margin-left: 2vw;
+  height: 3vh;
+}
+.search-posts-div button {
+  border: 1px solid grey;
+  height: 3vh;
+}
+.search-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
+  margin: 0 2vw;
+}
+.post-container {
+  /* position: relative; */
+  display: block;
+  margin: 4vh;
+  border: 1px solid grey;
+  padding: 2vh 2vw;
+  background: white;
+  max-height: 40vh;
+  width: 80%;
+}
+.post-container h1 {
+  color: black;
+}
+.post-container p {
+  font-size: 20px;
+  color: black;
+}
+.post-container img {
+  max-height: 15vh;
+}
+.edit-btn {
+  border: 1px solid grey;
+  height: 3vh;
+  top: 5vh;
+  right: 5vw;
+}
+.post-container div {
+  display: flex;
+  justify-content: flex-end;
 }
